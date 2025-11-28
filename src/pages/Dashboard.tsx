@@ -87,18 +87,18 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-8 space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 lg:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Dashboard</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">Dashboard</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">
             Welcome to your DS AI Agent platform. Monitor and manage your automation agents.
           </p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => navigate("/agents")}
-            className="px-4 py-2 rounded-lg bg-gradient-primary text-white font-medium hover:opacity-90 transition-opacity flex items-center gap-2"
+            className="px-4 py-2 rounded-lg bg-gradient-primary text-white font-medium hover:opacity-90 transition-opacity flex items-center gap-2 text-sm sm:text-base"
           >
             <Zap className="h-4 w-4" />
             Create Agent
@@ -107,7 +107,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat) => (
           <Card key={stat.title} className="shadow-card">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -133,7 +133,7 @@ export default function Dashboard() {
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Performance Trend Chart */}
         <Card className="shadow-card">
           <CardHeader>
@@ -141,38 +141,49 @@ export default function Dashboard() {
             <CardDescription>Order processing over the last 7 months</CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="h-[300px]">
-              <AreaChart data={performanceData}>
-                <defs>
-                  <linearGradient id="fillSuccess" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="hsl(142 76% 36%)" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="hsl(142 76% 36%)" stopOpacity={0} />
-                  </linearGradient>
-                  <linearGradient id="fillFailed" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="hsl(0 84% 60%)" stopOpacity={0.2} />
-                    <stop offset="95%" stopColor="hsl(0 84% 60%)" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis dataKey="month" className="text-xs" />
-                <YAxis className="text-xs" />
-                <ChartTooltip content={<ChartTooltipContent />} />
-                <Area
-                  type="monotone"
-                  dataKey="success"
-                  stroke="hsl(142 76% 36%)"
-                  fill="url(#fillSuccess)"
-                  name="Successful Orders"
-                />
-                <Area
-                  type="monotone"
-                  dataKey="failed"
-                  stroke="hsl(0 84% 60%)"
-                  fill="url(#fillFailed)"
-                  name="Failed Orders"
-                />
-              </AreaChart>
-            </ChartContainer>
+            <div className="w-full overflow-hidden">
+              <ChartContainer config={chartConfig} className="h-[300px] w-full min-w-0">
+                <AreaChart data={performanceData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="fillSuccess" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="hsl(142 76% 36%)" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="hsl(142 76% 36%)" stopOpacity={0} />
+                    </linearGradient>
+                    <linearGradient id="fillFailed" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="hsl(0 84% 60%)" stopOpacity={0.2} />
+                      <stop offset="95%" stopColor="hsl(0 84% 60%)" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis 
+                    dataKey="month" 
+                    className="text-xs"
+                    tick={{ fontSize: 12 }}
+                    interval="preserveStartEnd"
+                  />
+                  <YAxis 
+                    className="text-xs"
+                    tick={{ fontSize: 12 }}
+                    width={40}
+                  />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Area
+                    type="monotone"
+                    dataKey="success"
+                    stroke="hsl(142 76% 36%)"
+                    fill="url(#fillSuccess)"
+                    name="Successful Orders"
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="failed"
+                    stroke="hsl(0 84% 60%)"
+                    fill="url(#fillFailed)"
+                    name="Failed Orders"
+                  />
+                </AreaChart>
+              </ChartContainer>
+            </div>
           </CardContent>
         </Card>
 
@@ -215,7 +226,7 @@ export default function Dashboard() {
       </div>
 
       {/* Recent Orders and Activity Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Recent Orders Table */}
         <Card className="shadow-card">
           <CardHeader>
@@ -297,7 +308,7 @@ export default function Dashboard() {
       </div>
 
       {/* Quick Actions and Metrics */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Quick Actions */}
         <Card className="shadow-card">
           <CardHeader>
