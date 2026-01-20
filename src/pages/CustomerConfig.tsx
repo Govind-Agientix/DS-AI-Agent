@@ -76,7 +76,7 @@ export default function CustomerConfig() {
     queryKey: ["customers", searchQuery, statusFilter],
     queryFn: () =>
       customerClient.list({
-        search: searchQuery || undefined,
+        search: searchQuery.trim() || undefined,
         status: statusFilter !== "all" ? statusFilter : undefined,
       }),
   });
@@ -158,11 +158,11 @@ export default function CustomerConfig() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active":
+      case "Active":
         return "bg-green-500/10 text-green-600 dark:text-green-400";
-      case "inactive":
+      case "Inactive":
         return "bg-gray-500/10 text-gray-600 dark:text-gray-400";
-      case "suspended":
+      case "Suspended":
         return "bg-red-500/10 text-red-600 dark:text-red-400";
       default:
         return "bg-muted text-muted-foreground";
@@ -172,7 +172,7 @@ export default function CustomerConfig() {
   // Calculate stats
   const stats = {
     total: customers.length,
-    active: customers.filter((c) => c.status === "active").length,
+    active: customers.filter((c) => c.status === "Active").length,
     totalOrders: customers.reduce((sum, c) => sum + (c.usageStats?.totalOrders || 0), 0),
     activeAgents: customers.reduce((sum, c) => sum + (c.usageStats?.activeAgents || 0), 0),
   };

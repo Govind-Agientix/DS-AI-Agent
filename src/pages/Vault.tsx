@@ -269,11 +269,12 @@ export default function Vault() {
 
   // Filter credentials based on current tab, search, and filters
   const filteredCredentials = credentials.filter((cred) => {
+    const trimmedSearch = searchQuery.trim().toLowerCase();
     const matchesTab = cred.type === currentTab;
-    const matchesSearch = !searchQuery || 
-      cred.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      cred.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      cred.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesSearch = !trimmedSearch || 
+      cred.name.toLowerCase().includes(trimmedSearch) ||
+      cred.description?.toLowerCase().includes(trimmedSearch) ||
+      cred.tags.some(tag => tag.toLowerCase().includes(trimmedSearch));
     const matchesTag = tagFilter === "all" || cred.tags.includes(tagFilter);
     return matchesTab && matchesSearch && matchesTag;
   });

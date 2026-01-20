@@ -78,7 +78,7 @@ export default function Connections() {
     queryKey: ["connections", searchQuery, typeFilter, statusFilter, activeFilter],
     queryFn: () =>
       connectionsClient.list({
-        search: searchQuery || undefined,
+        search: searchQuery.trim() || undefined,
         type: typeFilter !== "all" ? typeFilter : undefined,
         status: statusFilter !== "all" ? statusFilter : undefined,
         isActive: activeFilter === "active" ? true : activeFilter === "inactive" ? false : undefined,

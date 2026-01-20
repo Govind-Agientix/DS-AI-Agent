@@ -48,6 +48,7 @@ export default function PromptLibrary() {
     scope?: string;
     status?: string;
   }>({});
+  const [showFilters, setShowFilters] = useState(true);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [editPrompt, setEditPrompt] = useState<Prompt | null>(null);
   const [testPrompt, setTestPrompt] = useState<Prompt | null>(null);
@@ -62,7 +63,7 @@ export default function PromptLibrary() {
     queryKey: ["prompts", searchQuery, filters],
     queryFn: () =>
       promptClient.list({
-        search: searchQuery || undefined,
+        search: searchQuery.trim() || undefined,
         ...filters,
       }),
   });
@@ -196,7 +197,7 @@ export default function PromptLibrary() {
     setSearchQuery("");
   };
 
-  const hasActiveFilters = searchQuery || filters.docType || filters.scope || filters.status;
+  const hasActiveFilters = searchQuery.trim() || filters.docType || filters.scope || filters.status;
 
   const getScopeColor = (scope: string) => {
     return scope === "Global" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent";
@@ -246,7 +247,7 @@ export default function PromptLibrary() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
-              <Button variant="outline" className="gap-2">
+              <Button variant="outline" className="gap-2" onClick={() => setShowFilters(!showFilters)}>
                 <Filter className="h-4 w-4" />
                 Filters
               </Button>
@@ -259,6 +260,7 @@ export default function PromptLibrary() {
             </div>
 
             {/* Filter Options */}
+            {showFilters && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t">
               <div className="space-y-2">
                 <label className="text-sm font-medium">Document Type</label>
@@ -324,6 +326,7 @@ export default function PromptLibrary() {
                 </Select>
               </div>
             </div>
+            )}
           </div>
         </CardHeader>
         <CardContent>

@@ -6,7 +6,7 @@ let MOCK_CUSTOMERS: Customer[] = [
     name: "Crowley Logistics",
     code: "CROW",
     description: "Major logistics provider specializing in marine transportation",
-    status: "active",
+    status: "Active",
     defaultOffice: "la",
     defaultServiceType: "drayage",
     billingPolicies: [
@@ -82,6 +82,7 @@ let MOCK_CUSTOMERS: Customer[] = [
         lastSync: "2025-01-15T10:30:00Z",
       },
     ],
+    connections: [],
     createdAt: "2025-01-01T00:00:00Z",
     updatedAt: "2025-01-15T10:30:00Z",
     usageStats: {
@@ -95,7 +96,7 @@ let MOCK_CUSTOMERS: Customer[] = [
     name: "IMC Companies",
     code: "IMC",
     description: "Intermodal container services provider",
-    status: "active",
+    status: "Active",
     defaultOffice: "oakland",
     defaultServiceType: "transload",
     billingPolicies: [],
@@ -111,6 +112,7 @@ let MOCK_CUSTOMERS: Customer[] = [
       },
     ],
     integrations: [],
+    connections: [],
     createdAt: "2025-01-05T00:00:00Z",
     updatedAt: "2025-01-10T08:00:00Z",
     usageStats: {
@@ -124,7 +126,7 @@ let MOCK_CUSTOMERS: Customer[] = [
     name: "ARC Logistics",
     code: "ARC",
     description: "Full-service logistics solutions",
-    status: "active",
+    status: "Active",
     defaultOffice: "seattle",
     defaultServiceType: "drayage",
     billingPolicies: [],
@@ -132,6 +134,7 @@ let MOCK_CUSTOMERS: Customer[] = [
     rules: [],
     contacts: [],
     integrations: [],
+    connections: [],
     createdAt: "2025-01-08T00:00:00Z",
     updatedAt: "2025-01-12T14:20:00Z",
     usageStats: {

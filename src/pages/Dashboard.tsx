@@ -45,10 +45,10 @@ export default function Dashboard() {
   ];
 
   const agentStatusData = [
-    { name: "Traffix Processor", status: "active", orders: 23, success: 98 },
-    { name: "Port Monitor", status: "active", orders: 18, success: 95 },
-    { name: "Global Terminal", status: "active", orders: 15, success: 100 },
-    { name: "Customs Handler", status: "active", orders: 12, success: 92 },
+    { name: "Traffix Processor", status: "Active", orders: 23, success: 98 },
+    { name: "Port Monitor", status: "Active", orders: 18, success: 95 },
+    { name: "Global Terminal", status: "Active", orders: 15, success: 100 },
+    { name: "Customs Handler", status: "Active", orders: 12, success: 92 },
     { name: "Document Processor", status: "warning", orders: 8, success: 75 },
   ];
 

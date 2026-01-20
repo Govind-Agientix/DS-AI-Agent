@@ -3,7 +3,7 @@ export interface Customer {
   name: string;
   code: string; // Short code like "CROW", "IMC"
   description?: string;
-  status: "active" | "inactive" | "suspended";
+  status: "Active" | "Inactive" | "Suspended";
   billingPolicies: BillingPolicy[];
   equipmentAliases: EquipmentAlias[];
   rules: CustomerRule[];
@@ -95,9 +95,9 @@ export interface Connection {
 }
 
 export const CUSTOMER_STATUSES = [
-  { value: "active", label: "Active" },
-  { value: "inactive", label: "Inactive" },
-  { value: "suspended", label: "Suspended" },
+  { value: "Active", label: "Active" },
+  { value: "Inactive", label: "Inactive" },
+  { value: "Suspended", label: "Suspended" },
 ] as const;
 
 export const BILLING_CATEGORIES = [

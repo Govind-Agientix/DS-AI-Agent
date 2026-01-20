@@ -72,7 +72,7 @@ export const customerSchema = z.object({
   name: z.string().min(1, "Customer name is required").min(2, "Name must be at least 2 characters"),
   code: z.string().min(1, "Customer code is required").max(10, "Code must be 10 characters or less"),
   description: z.string().optional(),
-  status: z.enum(["active", "inactive", "suspended"]).default("active"),
+  status: z.enum(["Active", "Inactive", "Suspended"]).default("Active"),
   defaultOffice: z.string().optional(),
   defaultServiceType: z.string().optional(),
   billingPolicies: z.array(billingPolicySchema).default([]),

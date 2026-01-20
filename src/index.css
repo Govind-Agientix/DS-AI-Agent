@@ -40,11 +40,11 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 251 63% 20%;
-    --sidebar-foreground: 247 63% 75%;
+    --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 247 63% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 251 63% 25%;
-    --sidebar-accent-foreground: 247 63% 80%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 251 63% 25%;
     --sidebar-ring: 191 91% 52%;
 
@@ -85,11 +85,11 @@ All colors MUST be HSL.
     --ring: 247 63% 52%;
 
     --sidebar-background: 251 63% 20%;
-    --sidebar-foreground: 247 63% 75%;
+    --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 247 63% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 251 63% 25%;
-    --sidebar-accent-foreground: 247 63% 80%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 251 63% 25%;
     --sidebar-ring: 191 91% 52%;
 

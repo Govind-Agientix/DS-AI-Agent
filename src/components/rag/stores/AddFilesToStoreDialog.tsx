@@ -33,9 +33,10 @@ export function AddFilesToStoreDialog({
 }: AddFilesToStoreDialogProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredFiles = files.filter((file) =>
-    file.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredFiles = files.filter((file) => {
+    const trimmedSearch = searchQuery.trim().toLowerCase();
+    return !trimmedSearch || file.name.toLowerCase().includes(trimmedSearch);
+  });
 
   const toggleFile = (fileId: string) => {
     if (selectedIds.includes(fileId)) {

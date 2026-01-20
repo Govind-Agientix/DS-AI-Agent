@@ -65,11 +65,21 @@ export function AppSidebar() {
                     <NavLink
                       to={item.url}
                       end
-                      className={({ isActive }) =>
+                      style={({ isActive }) =>
                         isActive
-                          ? "bg-sidebar-accent text-sidebar-primary font-medium text-base"
-                          : "text-sidebar-foreground/90 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground text-base"
+                          ? {
+                              backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                              color: 'white',
+                              fontWeight: 'bold',
+                              borderLeft: '4px solid #22d3ee',
+                              borderRadius: '6px',
+                              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                            }
+                          : {
+                              color: 'rgba(255, 255, 255, 0.7)',
+                            }
                       }
+                      className="text-base w-full"
                     >
                       <item.icon className="h-5 w-5" />
                       <span>{item.title}</span>

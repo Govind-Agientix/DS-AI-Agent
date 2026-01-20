@@ -204,10 +204,12 @@ export default function Orders() {
 
   // Filter orders
   const filteredOrders = orders.filter((order) => {
+    const trimmedSearch = searchQuery.trim().toLowerCase();
     const matchesSearch =
-      order.orderId.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.customer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.documentType.toLowerCase().includes(searchQuery.toLowerCase());
+      !trimmedSearch ||
+      order.orderId.toLowerCase().includes(trimmedSearch) ||
+      order.customer.toLowerCase().includes(trimmedSearch) ||
+      order.documentType.toLowerCase().includes(trimmedSearch);
     const matchesStatus = statusFilter === "all" || order.status === statusFilter;
     const matchesCustomer = customerFilter === "all" || order.customer === customerFilter;
     const matchesDocumentType = documentTypeFilter === "all" || order.documentType === documentTypeFilter;

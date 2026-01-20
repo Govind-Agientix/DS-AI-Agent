@@ -79,7 +79,7 @@ export default function Workflows() {
     queryKey: ["workflows", searchQuery, statusFilter, customerFilter],
     queryFn: () =>
       workflowClient.list({
-        search: searchQuery || undefined,
+        search: searchQuery.trim() || undefined,
         status: statusFilter !== "all" ? statusFilter : undefined,
         customer: customerFilter !== "all" ? customerFilter : undefined,
       }),
@@ -401,7 +401,7 @@ export default function Workflows() {
                     </TableCell>
                     <TableCell>
                       <Badge className={getStatusColor(workflow.status)}>
-                        {workflow.status}
+                        {workflow.status.charAt(0).toUpperCase() + workflow.status.slice(1)}
                       </Badge>
                     </TableCell>
                     <TableCell>
