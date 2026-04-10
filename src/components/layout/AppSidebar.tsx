@@ -1,19 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Bot,
   FileText,
   Users,
-  Plug,
-  Lock,
   Database,
   Workflow,
   ShoppingCart,
   LayoutDashboard,
+  LayoutGrid,
   Activity,
+  LogOut,
 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -22,6 +23,10 @@ import {
   SidebarMenuItem,
   SidebarHeader,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/auth/AuthContext";
+import { logoutRequest } from "@/auth/authApi";
+import { canAccessRoute, PORTAL_LABELS, ROLE_LABELS } from "@/auth/config";
 import logo from "@/assets/drayage-specialist-logo-white.png";
 
 const navItems = [
@@ -30,14 +35,30 @@ const navItems = [
   { title: "Agent Builder", url: "/agents", icon: Bot },
   { title: "Prompt Library", url: "/prompts", icon: FileText },
   { title: "Customer Config", url: "/customers", icon: Users },
-  { title: "Connections", url: "/connections", icon: Plug },
-  { title: "Credentials Manager", url: "/vault", icon: Lock },
+  { title: "Integrations", url: "/integrations", icon: LayoutGrid },
   { title: "RAG Library", url: "/rag", icon: Database },
   { title: "Workflows", url: "/workflows", icon: Workflow },
   { title: "Orders", url: "/orders", icon: ShoppingCart },
 ];
 
 export function AppSidebar() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const visibleNav = user
+    ? navItems.filter((item) => canAccessRoute(user.role, item.url))
+    : navItems;
+
+  async function handleLogout() {
+    try {
+      await logoutRequest();
+    } catch {
+      /* still clear local session */
+    } finally {
+      logout();
+      navigate("/login", { replace: true });
+    }
+  }
+
   return (
     <Sidebar className="border-r border-sidebar-border">
       <SidebarHeader className="border-b border-sidebar-border p-4">
@@ -59,7 +80,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map((item) => (
+              {visibleNav.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink
@@ -91,6 +112,30 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      {user && (
+        <SidebarFooter className="border-t border-sidebar-border p-3 gap-2">
+          <div className="text-xs text-sidebar-foreground/80 space-y-0.5 px-1">
+            <p className="font-medium text-sidebar-foreground truncate" title={user.email}>
+              {user.displayName}
+            </p>
+            <p className="truncate" title={PORTAL_LABELS[user.portal]}>
+              {PORTAL_LABELS[user.portal]}
+            </p>
+            <p className="text-sidebar-foreground/60 truncate">{ROLE_LABELS[user.role]}</p>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="w-full justify-start gap-2 bg-sidebar-accent/30 border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent/50"
+            onClick={handleLogout}
+          >
+            <LogOut className="h-4 w-4 shrink-0" />
+            Sign out
+          </Button>
+        </SidebarFooter>
+      )}
     </Sidebar>
   );
 }
